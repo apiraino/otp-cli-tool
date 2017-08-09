@@ -13,14 +13,14 @@ I've always used [Google Authenticator](https://play.google.com/store/apps/detai
 In order to mitigate this security issue, the keys should be stored an encrypted with GPG with a passphrase.
 
 #### Installation and configuration
-* Install [oathtool](http://www.nongnu.org/oath-toolkit)
-* Install [xclip](https://linux.die.net/man/1/xclip)
+* Install [oathtool](http://www.nongnu.org/oath-toolkit), [xclip](https://linux.die.net/man/1/xclip) and [gpg](https://gnupg.org)
 * Configure your GPG recipient in the script, editing `GPG_RECIPIENT="<YOUR_RECIPIENT@DOMAIN.NAME>"`
 * Tested on Linux
 
 #### Usage
  - `otp.sh edit` to edit or create the keyring.
     Key format is "KEYNAME=aaabbbccc", ex. "amazon=aaabbbccc"
+    The keyring default place will be `$HOME/.otpkeys.gpg`
  - `otp.sh service_name` to generate an OTP for the service
  - `otp.sh service_name -c` to copy the key directly into the main clipboad
 
