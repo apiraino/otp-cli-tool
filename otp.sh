@@ -76,7 +76,7 @@ then
     exit
 fi
 
-otpkey=` gpg --quiet -d $KEYFILE | grep ^$1 | cut -d"=" -f 2 | sed "s/ //g" `
+otpkey=` gpg --quiet -d $KEYFILE | grep ^$1= | cut -d"=" -f 2 | sed "s/ //g" `
 if [ -z $otpkey ]
 then
     echo "$scriptname: Bad Service Name"
