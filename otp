@@ -6,7 +6,7 @@ VERBOSE="false"                   # [true | false]
 ACTION="print-and-copy"           # [qr | print-and-copy | print ]
 
 ##################################################################
-# DO NOT EDIT BELLOW
+# DO NOT EDIT BELOW
 ##################################################################
 
 GPG="gpg"
@@ -194,7 +194,7 @@ edit_file() {
         iecho "Editing the keyfile"
         cmd_edit
     else
-        wecho "Editing invidual account is not supported"
+        wecho "Editing individual account is not supported"
         ehelp
     fi
 }

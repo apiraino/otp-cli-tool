@@ -16,7 +16,7 @@ In order to mitigate this security issue, the keys should be stored as encrypted
 #### Installation and configuration
 * Install [oathtool](http://www.nongnu.org/oath-toolkit) for the OTP generate function
 * Install [yq](https://github.com/mikefarah/yq/releases) to parse the config files
-* If useing automatic clipboard action install [xclip](https://linux.die.net/man/1/xclip)
+* If using automatic clipboard action install [xclip](https://linux.die.net/man/1/xclip)
 * Install [gpg](https://gnupg.org) to be able to encrypt the key file
 * Configure your GPG recipient in the script, editing `GPG_RECIPIENT="<YOUR_RECIPIENT@DOMAIN.NAME>"`
 * If using the QR code print function install [qrc](https://github.com/fumiyas/qrc)
@@ -44,4 +44,5 @@ gmail:
 
 ### Credit
 
-Forked from https://github.com/apiraino/otp-cli-tool but seriusly refactored
+ - This kind guy on [superuser](https://superuser.com/questions/462478/is-there-a-google-authenticator-desktop-client/853318#853318) that triggered the idea
+ - [pass](https://linux.die.net/man/1/pass): a great utility to store securely your passwords offline, don't use cloud keyrings such as LastPass or any other similar product. Some code is verbatim borrowed from that script.
