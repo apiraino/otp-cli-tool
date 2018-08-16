@@ -15,6 +15,7 @@ In order to mitigate this security issue, the keys should be stored as encrypted
 #### Installation and configuration
 * Install [oathtool](http://www.nongnu.org/oath-toolkit) for the OTP generate function
 * Install [yq](https://github.com/mikefarah/yq/releases) to parse the config files
+* Install [bc](https://www.gnu.org/software/bc/) to make calculations
 * If using automatic clipboard action install [xclip](https://linux.die.net/man/1/xclip)
 * Install [gpg](https://gnupg.org) to be able to encrypt the key file
 * Configure your GPG recipient in the script, editing `GPG_RECIPIENT="<YOUR_RECIPIENT@DOMAIN.NAME>"`

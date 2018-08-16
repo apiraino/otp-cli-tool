@@ -142,21 +142,13 @@ cmd_get_otp() {
             eecho "Bad Service Name"
             exit
         fi
-        now=$(date +%S)
-        case $now in
-            29|59)
-            echo "Code about to change, waiting 1s"
-            sleep 1.1
-            ;;
-            28|58)
-            echo "Code about to change, waiting 2s"
-            sleep 2.1
-            ;;
-            27|57)
-            echo "Code about to change, waiting 3s"
-            sleep 3.1
-            ;;
-        esac
+
+        time_left=$(echo "$(date +%S) % 30" | bc -l )
+        if [ $time_left -lt 4 ]; then
+            echo "Waiting $time_left..."
+            sleep $time_left && sleep 0.1
+        fi
+
         otp=$(oathtool --totp -b "$otpkey" | tr -d '\n')
         if $2; then
             check_dep clip
