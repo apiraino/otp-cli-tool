@@ -148,9 +148,16 @@ cmd_get_otp() {
             exit
         fi
 
-        time_left=$(echo "$(date +%S) % 30" | bc -l )
-        if [ $time_left -lt $DELAY ]; then
-            echo "Waiting $time_left..."
+        period=$(gpg --quiet -d $KEYFILE | yq r - "$1".period)
+        if [ "$period" == "null" ]
+        then
+            iecho "No period defined for $1, defauling back to 30 sec"
+            period="30"
+        fi
+
+        time_left=$(echo "$period - $(date +%S) % $period" | bc )
+        if [ "$time_left" -lt "$DELAY" ] && [ "$time_left" -ne "0" ]; then
+            echo "Waiting $time_left second ..."
             sleep $time_left && sleep 0.1
         fi
 
@@ -182,7 +189,13 @@ print_qr() {
         otpSecret=$(yq r - otpSecret <<< "$account")
         otplabel=$(yq r - label <<< "$account")
         otpissuer=$(yq r - issuer <<< "$account")
-        qrc "otpauth://$otptype/$otplabel?secret=$otpSecret&issuer=$otpissuer"
+        period=$(yq r - "$1".period <<< "$account")
+        if [ "$period" == "null" ]
+        then
+            iecho "No period defined for $ACCOUNT, defauling back to 30 sec"
+            period="30"
+        fi
+        qrc "otpauth://$otptype/$otplabel?secret=$otpSecret&issuer=$otpissuer&period=$period"
     fi
 }
 

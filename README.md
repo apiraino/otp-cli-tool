@@ -35,6 +35,8 @@ gmail:
   label: office@domain.tld
   # for the logo
   issuer: gmail
+  # for the time period [optional]
+  period: 30
 ```
     For a valid issuer list check for example https://github.com/bilelmoussaoui/Authenticator/blob/master/data/data.json
 
