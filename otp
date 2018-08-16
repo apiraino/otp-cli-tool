@@ -4,6 +4,7 @@ KEYFILE=~/.otpkeys.gpg            # Some secure location
 GPG_RECIPIENT="<YOUR@DOMAIN.tld>" # your own e-mail with GPG
 VERBOSE="false"                   # [true | false]
 ACTION="print-and-copy"           # [qr | print-and-copy | print ]
+DELAY=4                           # your delay between copy and paste
 
 ##################################################################
 # DO NOT EDIT BELOW
@@ -144,7 +145,7 @@ cmd_get_otp() {
         fi
 
         time_left=$(echo "$(date +%S) % 30" | bc -l )
-        if [ $time_left -lt 4 ]; then
+        if [ $time_left -lt $DELAY ]; then
             echo "Waiting $time_left..."
             sleep $time_left && sleep 0.1
         fi
