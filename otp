@@ -69,6 +69,10 @@ case $1 in
     if ! [ -x "$(command -v yq)" ]; then
         eecho 'yq is not installed.'
     fi
+    # bc for making calculations
+    if ! [ -x "$(command -v bc)" ]; then
+        eecho 'bc is not installed.'
+    fi
     # keyfile needs to exist
     if ! [[ -f $KEYFILE ]]; then
         wecho "Can't find keyring file. run \"otp -a edit\""
