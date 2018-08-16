@@ -2,8 +2,7 @@
 
 ### What's this
 
-A simple command line tool to generate a [One Time Password](https://en.wikipedia.org/wiki/One-time_password) to perform
-[Two-Factor Authentication](https://en.wikipedia.org/wiki/Multi-factor_authentication), __something everyone should use if available__.
+A simple command line tool to generate a [One Time Password](https://en.wikipedia.org/wiki/One-time_password) to perform [Two-Factor Authentication](https://en.wikipedia.org/wiki/Multi-factor_authentication), __something everyone should use if available__.
 
 ### Why
 
@@ -42,7 +41,7 @@ gmail:
  - `otp service_name` to generate an OTP for the service
  - `otp service_name -a print-and-copy` to copy the key directly into the main clipboad
 
-### Credit
+#### Credits
 
  - This kind guy on [superuser](https://superuser.com/questions/462478/is-there-a-google-authenticator-desktop-client/853318#853318) that triggered the idea
  - [pass](https://linux.die.net/man/1/pass): a great utility to store securely your passwords offline, don't use cloud keyrings such as LastPass or any other similar product. Some code is verbatim borrowed from that script.
