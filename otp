@@ -182,7 +182,7 @@ print_qr() {
         iecho "Printing QR code for $ACCOUNT"
         account=$(gpg --quiet -d $KEYFILE | yq r - "$1")
         otptype=$(yq r - type <<< "$account")
-        if ! [ "$otptype" == "topt" ]
+        if ! [ "$otptype" == "totp" ]
         then
                 wecho "cli option for this account will not work (not supported type)"
         fi
