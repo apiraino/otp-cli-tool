@@ -18,9 +18,9 @@ GPG_OPTS=( "--quiet" "--yes" "--compress-algo=none" "--no-encrypt-to" )
 ############
 
 iecho(){
-if [ "$VERBOSE" == "true" ];then
-    echo -e "\e[34mINFO\e[39m: $1"
-fi
+    if [ "$VERBOSE" == "true" ];then
+        echo -e "\e[34mINFO\e[39m: $1"
+    fi
 }
 wecho(){
     echo -e "\e[33mWARNING\e[39m: $1"
@@ -35,7 +35,7 @@ eecho(){
 ############
 
 ehelp(){
-cat << EOF
+    cat << EOF
 Basic
   otp account
 
@@ -55,42 +55,42 @@ EOF
 ############
 
 check_dep(){
-case $1 in
-  basic)
-    # gpg for file encryption
-    if ! [ -x "$(command -v gpg)" ]; then
-        eecho 'GPG is not installed.'
-    fi
-    # oathtool for the OTP function itself
-    if ! [ -x "$(command -v oathtool)" ]; then
-        eecho 'oathtool is not installed.'
-    fi
-    # yq for reading keys
-    if ! [ -x "$(command -v yq)" ]; then
-        eecho 'yq is not installed.'
-    fi
-    # bc for making calculations
-    if ! [ -x "$(command -v bc)" ]; then
-        eecho 'bc is not installed.'
-    fi
-    # keyfile needs to exist
-    if ! [[ -f $KEYFILE ]]; then
-        wecho "Can't find keyring file. run \"otp -a edit\""
-    fi
-  ;;
-  clip)
-    # xclip for clipboard interaction
-    if ! [ -x "$(command -v xclip)" ]; then
-        eecho 'xclip is not installed.'
-    fi
-  ;;
-  qr)
-    # qrencode for printing QR codes
-    if ! [ -x "$(command -v qrencode)" ]; then
-        eecho 'qrencode is not installed.'
-    fi
-  ;;
-esac
+    case $1 in
+        basic)
+            # gpg for file encryption
+            if ! [ -x "$(command -v gpg)" ]; then
+                eecho 'GPG is not installed.'
+            fi
+            # oathtool for the OTP function itself
+            if ! [ -x "$(command -v oathtool)" ]; then
+                eecho 'oathtool is not installed.'
+            fi
+            # yq for reading keys
+            if ! [ -x "$(command -v yq)" ]; then
+                eecho 'yq is not installed.'
+            fi
+            # bc for making calculations
+            if ! [ -x "$(command -v bc)" ]; then
+                eecho 'bc is not installed.'
+            fi
+            # keyfile needs to exist
+            if ! [[ -f $KEYFILE ]]; then
+                wecho "Can't find keyring file. run \"otp -a edit\""
+            fi
+            ;;
+        clip)
+            # xclip for clipboard interaction
+            if ! [ -x "$(command -v xclip)" ]; then
+                eecho 'xclip is not installed.'
+            fi
+            ;;
+        qr)
+            # qrencode for printing QR codes
+            if ! [ -x "$(command -v qrencode)" ]; then
+                eecho 'qrencode is not installed.'
+            fi
+            ;;
+    esac
 }
 
 tmpdir() {
@@ -130,7 +130,7 @@ cmd_edit() {
         wecho -n "GPG encryption failed. Would you like to try again? [Y/n] "
         read -r line
         if [ "$line" == "n" ]; then
-           exit 1
+            exit 1
         fi
     done
     iecho "File $KEYFILE saved"
@@ -184,7 +184,7 @@ print_qr() {
         otptype=$(yq r - type <<< "$account")
         if ! [ "$otptype" == "totp" ]
         then
-                wecho "cli option for this account will not work (not supported type)"
+            wecho "cli option for this account will not work (not supported type)"
         fi
         otpSecret=$(yq r - otpSecret <<< "$account")
         otplabel=$(yq r - label <<< "$account")
@@ -216,39 +216,39 @@ if [[ $# -lt 1 ]]; then
     exit
 else
 
-while [[ $# -gt 0 ]]; do
-key="$1"
+    while [[ $# -gt 0 ]]; do
+        key="$1"
 
-case $key in
-    -a|--action)
-    ACTION="$2"
-    shift
-    ;;
-    -h|--help|help)
-    ehelp
-    exit
-    ;;
-    *)
-    ACCOUNT=$key
-    ;;
-esac
-shift
-done
+        case $key in
+            -a|--action)
+                ACTION="$2"
+                shift
+                ;;
+            -h|--help|help)
+                ehelp
+                exit
+                ;;
+            *)
+                ACCOUNT=$key
+                ;;
+        esac
+        shift
+    done
 fi
 
 
 
 case $ACTION in
     print-and-copy)
-    cmd_get_otp "$ACCOUNT" true
-    ;;
+        cmd_get_otp "$ACCOUNT" true
+        ;;
     print)
-    cmd_get_otp "$ACCOUNT"
-    ;;
+        cmd_get_otp "$ACCOUNT"
+        ;;
     qr)
-    print_qr "$ACCOUNT"
-    ;;
+        print_qr "$ACCOUNT"
+        ;;
     edit)
-    edit_file "$ACCOUNT"
-    ;;
+        edit_file "$ACCOUNT"
+        ;;
 esac
