@@ -151,7 +151,7 @@ cmd_get_otp() {
         time_left=$(echo "$period - $(date +%S) % $period" | bc )
         if [ "$time_left" -lt "$DELAY" ] && [ "$time_left" -ne "0" ]; then
             echo "Waiting $time_left second ..."
-            sleep $time_left 0.1
+            sleep "$time_left" 0.1
         fi
 
         otp=$(oathtool --totp -b "$otpkey" | tr -d '\n')
