@@ -57,22 +57,15 @@ EOF
 check_dep(){
     case $1 in
         basic)
-            # gpg for file encryption
-            if ! [ -x "$(command -v gpg)" ]; then
-                eecho 'GPG is not installed.'
-            fi
-            # oathtool for the OTP function itself
-            if ! [ -x "$(command -v oathtool)" ]; then
-                eecho 'oathtool is not installed.'
-            fi
-            # yq for reading keys
-            if ! [ -x "$(command -v yq)" ]; then
-                eecho 'yq is not installed.'
-            fi
-            # bc for making calculations
-            if ! [ -x "$(command -v bc)" ]; then
-                eecho 'bc is not installed.'
-            fi
+            # gpg: file encryption
+            # oathtool: the OTP function itself
+            # yq: read keys from config file
+            # bc: do calculations
+            for item in gpg oathtool yq bc; do
+                if ! [ -x "$(command -v $item)" ]; then
+                    eecho "$item is not installed."
+                fi
+            done
             # keyfile needs to exist
             if ! [[ -f $KEYFILE ]]; then
                 wecho "Can't find keyring file. run \"otp -a edit\""
@@ -158,7 +151,7 @@ cmd_get_otp() {
         time_left=$(echo "$period - $(date +%S) % $period" | bc )
         if [ "$time_left" -lt "$DELAY" ] && [ "$time_left" -ne "0" ]; then
             echo "Waiting $time_left second ..."
-            sleep $time_left && sleep 0.1
+            sleep $time_left 0.1
         fi
 
         otp=$(oathtool --totp -b "$otpkey" | tr -d '\n')
@@ -175,12 +168,17 @@ cmd_get_otp() {
 }
 
 print_qr() {
+    check_dep basic
     check_dep qr
     if [[ "$ACCOUNT" == "" ]]; then
         eecho "No account set use help"
     else
         iecho "Printing QR code for $ACCOUNT"
         account=$(gpg --quiet -d $KEYFILE | yq r - "$1")
+        if [ -z "$account" ]; then
+            eecho "Could not retrieve account data"
+            exit 1
+        fi
         otptype=$(yq r - type <<< "$account")
         if ! [ "$otptype" == "totp" ]
         then
