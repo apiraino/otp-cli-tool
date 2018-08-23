@@ -19,7 +19,7 @@ In order to mitigate this security issue, the keys should be stored as encrypted
 * If using automatic clipboard action install [xclip](https://linux.die.net/man/1/xclip)
 * Install [gpg](https://gnupg.org) to be able to encrypt the key file
 * Configure your GPG recipient in the script, editing `GPG_RECIPIENT="<YOUR_RECIPIENT@DOMAIN.NAME>"`
-* If using the QR code print function install [qrc](https://github.com/fumiyas/qrc)
+* If using the QR code print function install [qrencode](https://fukuchi.org/works/qrencode/index.html.en)
 
 #### Usage
  - `otp -a edit` to edit or create the keyring.

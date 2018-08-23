@@ -85,9 +85,9 @@ case $1 in
     fi
   ;;
   qr)
-    # qrc for printing QR codes
-    if ! [ -x "$(command -v qrc)" ]; then
-        eecho 'qrc is not installed.'
+    # qrencode for printing QR codes
+    if ! [ -x "$(command -v qrencode)" ]; then
+        eecho 'qrencode is not installed.'
     fi
   ;;
 esac
@@ -195,7 +195,7 @@ print_qr() {
             iecho "No period defined for $ACCOUNT, defauling back to 30 sec"
             period="30"
         fi
-        qrc "otpauth://$otptype/$otplabel?secret=$otpSecret&issuer=$otpissuer&period=$period"
+        qrencode -t UTF8 "otpauth://$otptype/$otplabel?secret=$otpSecret&issuer=$otpissuer&period=$period"
     fi
 }
 
