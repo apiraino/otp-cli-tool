@@ -23,22 +23,21 @@ In order to mitigate this security issue, the keys should be stored as encrypted
 
 #### Usage
  - `otp -a edit` to edit or create the keyring.
-    The format for the config file is stored in YAML, and a sample looks like this
-
-```
-gmail:
-  # valid totp or hotp
-  type: totp
-  # the key, no spaces
-  otpSecret: aaabbbcccddd111222333
-  # in case scaned in an app
-  label: office@domain.tld
-  # for the logo
-  issuer: gmail
-  # for the time period [optional]
-  period: 30
-```
-    For a valid issuer list check for example https://github.com/bilelmoussaoui/Authenticator/blob/master/data/data.json
+    The format for the config file is stored in YAML, and a sample looks like this:
+    ```
+    gmail:
+      # valid totp or hotp
+      type: totp
+      # the key, no spaces
+      otpSecret: aaabbbcccddd111222333
+      # in case scanned in an app
+      label: office@domain.tld
+      # for the logo
+      issuer: gmail
+      # for the time period [optional]
+      period: 30
+    ```
+    For a valid issuer list check for example [this list](https://github.com/bilelmoussaoui/Authenticator/blob/master/data/data.json).
 
     The keyring default place will be `$HOME/.otpkeys.gpg`
  - `otp service_name` to generate an OTP for the service
@@ -48,3 +47,4 @@ gmail:
 
  - This kind guy on [superuser](https://superuser.com/questions/462478/is-there-a-google-authenticator-desktop-client/853318#853318) that triggered the idea
  - [pass](https://linux.die.net/man/1/pass): a great utility to store securely your passwords offline, don't use cloud keyrings such as LastPass or any other similar product. Some code is verbatim borrowed from that script.
+ - [@kisst](https://github.com/kisst) for improving the script
