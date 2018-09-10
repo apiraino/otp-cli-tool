@@ -175,7 +175,7 @@ print_qr() {
     else
         iecho "Printing QR code for $ACCOUNT"
         account=$(gpg --quiet -d $KEYFILE | yq r - "$1")
-        if [ -z "$account" ]; then
+        if [ -z "$account" ] || [ "$account" == "null" ]; then
             eecho "Could not retrieve account data"
         fi
         otptype=$(yq r - type <<< "$account")
