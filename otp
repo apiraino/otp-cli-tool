@@ -177,7 +177,6 @@ print_qr() {
         account=$(gpg --quiet -d $KEYFILE | yq r - "$1")
         if [ -z "$account" ]; then
             eecho "Could not retrieve account data"
-            exit 1
         fi
         otptype=$(yq r - type <<< "$account")
         if ! [ "$otptype" == "totp" ]
