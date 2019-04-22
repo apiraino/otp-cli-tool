@@ -1,5 +1,7 @@
 ### A simple CLI tool for generating OTP for 2FA
 
+**WARNING**: if you really want to get serious about offline password management and OTP token generation, you should use [pass](https://www.passwordstore.org). `otp-cli-tool` is a simpler tool that I wrote before discovering `pass`.
+
 ### What's this
 
 A simple command line tool to generate a [One Time Password](https://en.wikipedia.org/wiki/One-time_password) to perform [Two-Factor Authentication](https://en.wikipedia.org/wiki/Multi-factor_authentication), __something everyone should use if available__.
